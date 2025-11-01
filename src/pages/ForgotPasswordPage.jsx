@@ -13,18 +13,17 @@ import BackgroundForgotPassword  from '../components/background/BackgroundForgot
 export default function ForgotPasswordPage() {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
-    const [message, setMessage] = useState(""); // Başarı mesajı
-    const [error, setError] = useState("");     // Hata mesajı
+    const [message, setMessage] = useState(""); 
+    const [error, setError] = useState("");   
 
-    // 2. GEREKLİ METOT (Handler Fonksiyonu)
-    // Bu fonksiyon, formu gönderdiğimizde çalışacak.
+
     const handlePasswordReset = async (e) => {
-        e.preventDefault(); // Sayfanın yeniden yüklenmesini engeller
+        e.preventDefault(); 
         setError("");
         setMessage("");
 
         try {
-            // Firebase'in 'sendPasswordResetEmail' metodunu burada kullanıyoruz
+  
             await sendPasswordResetEmail(auth, email);
             setMessage('Şifre sıfırlama e-postası gönderildi. Lütfen gelen kutunuzu kontrol edin.');
             
@@ -33,7 +32,7 @@ export default function ForgotPasswordPage() {
             }, 1000);
             
         } catch (err) {
-            // Kullanıcı bulunamazsa veya hata olursa
+
             if (err.code === 'auth/user-not-found') {
                 setError('Bu e-posta adresine kayıtlı bir kullanıcı bulunamadı.');
             } else {
@@ -64,12 +63,12 @@ export default function ForgotPasswordPage() {
                     />
                 </div>
                 
-                {/* Hata ve Başarı Mesajları */}
+
                 {message && <p className="text-sm text-green-600 -mt-4">{message}</p>}
                 {error && <p className="text-sm text-red-500 -mt-4">{error}</p>}
 
                 <div className="flex flex-col gap-4 items-center justify-center w-full">
-                    {/* Buton formu gönderecek (type="submit") */}
+ 
                     <Button type="submit" variant="danger" whattype="text" text="SIFIRLAMA LİNKİ GÖNDER" />
                     
                     <Link to="/login" className="text-[13px] text-[#397762] hover:text-[#5FE4B8] transition hover:duration-200 active:text-[#72A795]">
