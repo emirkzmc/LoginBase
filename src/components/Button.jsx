@@ -19,7 +19,7 @@ export default function Button({ text, onClick, variant , whattype,className }) 
             break;
 
         default:
-            selectedVariants = "bg-[#20B447]/25 border-[1px] border-[#43A44E] w-[300px] h-10 text-xl rounded-4xl hover:bg-[#9BFFB6] transition hover:duration-300 hover:ease-in-out";
+            selectedVariants = {className};
             break;
     }
     return (

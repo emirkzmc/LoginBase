@@ -30,7 +30,8 @@ export default function InputField({
   focusBorderColor = "#24AC6D",
   showPassword = false,
   className = "",
-  required = false
+  required = false,
+  disabled = false,
 }) {
   const icon = iconPaths[iconType];
 
@@ -62,6 +63,7 @@ export default function InputField({
       </svg>
 
       <Input
+        disabled={disabled}
         placeholder={placeholder}
         typee={typee}
         value={value}

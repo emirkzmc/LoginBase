@@ -1,4 +1,4 @@
-export default function Input({ placeholder, className, onChange, typee = "text", showPassword = false, style, required, onFocus, onBlur, value }) {
+export default function Input({ placeholder,disabled=false, className,name, onChange, typee = "text", showPassword = false, style, required, onFocus, onBlur, value }) {
   const inputType = typee === "password" && showPassword ? "text" : typee;
 
   return (
@@ -12,6 +12,8 @@ export default function Input({ placeholder, className, onChange, typee = "text"
       required={required}
       onFocus={onFocus}
       onBlur={onBlur}
+      disabled={disabled}
+      name={name}
     />
   );
 }
