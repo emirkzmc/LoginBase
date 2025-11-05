@@ -40,8 +40,6 @@ const Navbar = memo(function Navbar() {
                     ${userInfoLoading ? 'opacity-0' : 'opacity-100'} 
                 `}>
                     Hoş Geldin, <br />
-
-
                     {displayText || <>&nbsp;</>}
                 </p>
 
