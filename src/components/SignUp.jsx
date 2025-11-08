@@ -10,6 +10,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { updateProfile } from "firebase/auth";
 
 
+
 export default function Signup() {
   const [usertc, setUsertc] = useState("");
   const [name, setName] = useState("");
@@ -19,6 +20,8 @@ export default function Signup() {
   const [isChecked, setIsChecked] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+
+  
 
   const handleTcChange = (e) => {
     const value = e.target.value;

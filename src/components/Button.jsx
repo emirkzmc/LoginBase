@@ -15,7 +15,7 @@ export default function Button({ text, onClick, variant , whattype,className }) 
             break;
 
         case "danger":
-            selectedVariants = "bg-gradient-to-b from-[#c94b4b] to-[#e84a4a] border-[1px] border-[#c94b4b] w-[300px] h-10 text-xl rounded-4xl text-white font-semibold hover:from-[#b03a3a] hover:to-[#d43939] hover:border-[#b03a3a] transition-all duration-300 hover:ease-in-out active:from-[#9a2d2d] active:to-[#b82e2e] active:border-[#9a2d2d] shadow-lg hover:shadow-xl hover:shadow-[#c94b4b]/50 hover:scale-105";
+            selectedVariants = "bg-gradient-to-b from-[#c94b4b] to-[#e84a4a] border-[1px] border-[#c94b4b] w-[300px] h-10 text-xl rounded-4xl text-white  hover:from-[#e85a70] hover:to-[#e85a70] hover:border-[#750012] transition hover:duration-300 hover:ease-in-out active:from-[#9a2d2d] active:to-[#b82e2e] active:border-[#9a2d2d] shadow-lg  ";
             break;
 
         default:
@@ -24,7 +24,7 @@ export default function Button({ text, onClick, variant , whattype,className }) 
     }
     return (
         <>
-            <button type={whattype} onClick={onClick} className={`${selectedVariants} ${className}`} >{text}</button>
+            <button type={whattype} onClick={onClick} className={`${selectedVariants} ${className} cursor-pointer`} >{text}</button>
         </>
     );
 }

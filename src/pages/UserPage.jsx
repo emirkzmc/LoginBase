@@ -4,12 +4,14 @@ import Navbar from '../components/Navbar';
 import Input from '../components/Input';
 import Loading from '../components/animate/Loading';
 import Label from '../components/Label';
+import Button from '../components/Button'; // Zaten import edilmiş, harika!
 import UserPageBackground from '../components/background/UserPageBackground';
 import { getFirestore, doc, updateDoc } from 'firebase/firestore';
 
 export default function UserPage() {
-    const { currentUser, userInfo, userInfoLoading } = useAuth();
+    const { currentUser, userInfo, userInfoLoading , refreshUserInfo } = useAuth();
     const db = getFirestore();
+    
 
     const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState({
@@ -53,10 +55,13 @@ export default function UserPage() {
 
             const dataToUpdate = {
                 name: formData.name,
-                email: formData.email
+                email: formData.email,
+                usertc: formData.usertc
             };
 
             await updateDoc(userDocRef, dataToUpdate);
+
+            await refreshUserInfo();
 
             setIsEditing(false);
         } catch (error) {
@@ -80,6 +85,8 @@ export default function UserPage() {
             </UserPageBackground>
         );
     }
+
+   
 
     return (
         <UserPageBackground>
@@ -119,8 +126,8 @@ export default function UserPage() {
                                 <Input
                                     name="usertc"
                                     value={formData.usertc}
-                                    disabled={true}
-                                    readOnly
+                                    onChange={handleChange}
+                                    disabled={!isEditing || isSaving}
                                     className='w-full bg-gray-50 border border-gray-300 rounded md:px-4 px-8 py-2 md:py-2 text-gray-800 disabled:text-blue-950 disabled:opacity-70'
                                 />
                             </div>
@@ -133,33 +140,31 @@ export default function UserPage() {
 
                             <div className='flex justify-end gap-4'>
                                 {isEditing && (
-                                    <button
+                                    <Button
+                                        text="İptal"
+                                        whattype="button"
                                         onClick={() => {
                                             setIsEditing(false);
                                             setSaveError(null);
                                         }}
-                                        disabled={isSaving}
                                         className='px-6 py-2 bg-gray-300 text-gray-800 rounded-lg font-semibold hover:bg-gray-400 disabled:opacity-50'
-                                    >
-                                        İptal
-                                    </button>
+                                    />
                                 )}
 
                                 {isEditing ? (
-                                    <button
+                                    <Button
+                                        text={isSaving ? <Loading w='25' h='25' /> : 'Kaydet'}
+                                        whattype="button"
                                         onClick={handleSave}
-                                        disabled={isSaving}
                                         className='px-6 py-2 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 disabled:opacity-50'
-                                    >
-                                        {isSaving ? <Loading w='25' h='25'/> : 'Kaydet'}
-                                    </button>
+                                    />
                                 ) : (
-                                    <button
+                                    <Button
+                                        text="Düzenle"
+                                        whattype="button"
                                         onClick={() => setIsEditing(true)}
                                         className='px-6 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700'
-                                    >
-                                        Düzenle
-                                    </button>
+                                    />
                                 )}
                             </div>
                         </div>

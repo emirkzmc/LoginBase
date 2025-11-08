@@ -4,6 +4,7 @@ import { signOut } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
 import { useAuth } from '../context/AuthContext';
 import Button from './Button';
+import Loading from './animate/Loading';
 
 const Navbar = memo(function Navbar() {
 
@@ -29,6 +30,10 @@ const Navbar = memo(function Navbar() {
 
 
     const displayText = userInfo ? userInfo.name : (currentUser ? currentUser.email : null);
+
+    if(userInfoLoading){
+        <Loading />
+    } 
 
     return (
         <>

@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, useEffect, useMemo, useCall
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth, db } from '../firebaseConfig';
 import { doc, getDoc } from 'firebase/firestore';
-
+import Loading from '../components/animate/Loading';
 
 const AuthContext = createContext();
 
@@ -44,19 +44,44 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      setCurrentUser(user);
-      setLoading(false);
-      
+      setCurrentUser(user); 
 
       if (user) {
-        await fetchUserInfo(user.uid);
+  
+        setUserInfoLoading(true);
+        try {
+          const docRef = doc(db, "users", user.uid);
+          const docSnap = await getDoc(docRef);
+
+          if (docSnap.exists()) {
+        
+            setUserInfo(docSnap.data());
+          } else {
+          
+            setUserInfo({
+              name: user.displayName,
+              email: user.email,
+              usertc: "Belirtilmemiş" 
+            });
+            console.log("Kullanıcı verisi bulunamadı, Auth verisi kullanılıyor.");
+          }
+        } catch (error) {
+          console.error("Kullanıcı bilgisi alınamadı:", error);
+          setUserInfo(null);
+        } finally {
+          setUserInfoLoading(false); 
+        }
+        
       } else {
+       
         setUserInfo(null);
       }
+      
+      setLoading(false); 
     });
 
     return unsubscribe;
-  }, [fetchUserInfo]);
+  }, []);
 
 
   const value = useMemo(() => ({
@@ -68,7 +93,14 @@ export function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
-    </AuthContext.Provider>
+      {loading ? <GlobalLoadingScreen /> : children}
+    </AuthContext.Provider>
   );
 }
+const GlobalLoadingScreen = () => {
+  return (
+    <div className="w-full h-screen flex justify-center items-center bg-white">
+      <Loading w="100" h="100" color='black' /> 
+    </div>
+  );
+};
