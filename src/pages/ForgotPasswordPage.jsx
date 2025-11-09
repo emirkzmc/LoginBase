@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
-// 1. GEREKLİ METOT (Firebase Metodu)
 import { sendPasswordResetEmail } from 'firebase/auth'; 
 import { auth } from '../firebaseConfig'; 
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-
-// Senin özel component'lerin (yollarını kontrol et)
 import Button from '../components/Button';
 import InputField from '../components/InputField';
 import BackgroundForgotPassword  from '../components/background/BackgroundForgotPassword';

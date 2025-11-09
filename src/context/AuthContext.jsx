@@ -23,7 +23,7 @@ export function AuthProvider({ children }) {
       setUserInfo(null);
       return;
     }
-    
+
     setUserInfoLoading(true);
     try {
       const docRef = doc(db, "users", uid);
@@ -44,24 +44,24 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      setCurrentUser(user); 
+      setCurrentUser(user);
 
       if (user) {
-  
+
         setUserInfoLoading(true);
         try {
           const docRef = doc(db, "users", user.uid);
           const docSnap = await getDoc(docRef);
 
           if (docSnap.exists()) {
-        
+
             setUserInfo(docSnap.data());
           } else {
-          
+
             setUserInfo({
               name: user.displayName,
               email: user.email,
-              usertc: "Belirtilmemiş" 
+              usertc: "Belirtilmemiş"
             });
             console.log("Kullanıcı verisi bulunamadı, Auth verisi kullanılıyor.");
           }
@@ -69,15 +69,15 @@ export function AuthProvider({ children }) {
           console.error("Kullanıcı bilgisi alınamadı:", error);
           setUserInfo(null);
         } finally {
-          setUserInfoLoading(false); 
+          setUserInfoLoading(false);
         }
-        
+
       } else {
-       
+
         setUserInfo(null);
       }
-      
-      setLoading(false); 
+
+      setLoading(false);
     });
 
     return unsubscribe;
@@ -93,14 +93,14 @@ export function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider value={value}>
-      {loading ? <GlobalLoadingScreen /> : children}
-    </AuthContext.Provider>
+      {loading ? <GlobalLoadingScreen /> : children}
+    </AuthContext.Provider>
   );
 }
 const GlobalLoadingScreen = () => {
   return (
     <div className="w-full h-screen flex justify-center items-center bg-white">
-      <Loading w="100" h="100" color='black' /> 
+      <Loading w="100" h="100" color='black' />
     </div>
   );
 };

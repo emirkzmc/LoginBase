@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar';
 import Input from '../components/Input';
 import Loading from '../components/animate/Loading';
 import Label from '../components/Label';
-import Button from '../components/Button'; // Zaten import edilmiş, harika!
+import Button from '../components/Button'; 
 import UserPageBackground from '../components/background/UserPageBackground';
 import { getFirestore, doc, updateDoc } from 'firebase/firestore';
 
