@@ -3,11 +3,10 @@ import InputField from "./InputField";
 import Button from "./Button";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth, googleProvider, db } from "../firebaseConfig";
+import { auth , googleProvider, db } from "../config/firebaseConfig.js";
 import { useNavigate } from "react-router-dom";
-import { signInWithPopup } from "firebase/auth"
-import { doc, setDoc, getDoc } from "firebase/firestore";
+import { useLogin } from "../hooks/useLogin.js";
+import { useGoogleLogin } from "../hooks/useGoogleLogin.js";
 
 export default function SignIn() {
 
@@ -17,51 +16,10 @@ export default function SignIn() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const loginWithGoogle = async () => {
-    try {
-      const result = await signInWithPopup(auth, googleProvider);
-      const user = result.user;
+  
 
-      const userDocRef = doc(db, "users", user.uid);
-      const docSnap = await getDoc(userDocRef);
-
-      if (!docSnap.exists()) {
-        await setDoc(userDocRef, {
-          name: user.displayName,
-          email: user.email,
-          usertc: "Belirtilmemiş"
-        });
-        console.log("Yeni kullanıcı oluşturuldu ve veritabanına eklendi.");
-      }
-
-      navigate('/');
-    } catch (error) {
-      console.error("Google ile giriş hatası:", error);
-      if (err.code === "auth/popup-closed-by-user") {
-        setError("Giriş yapılamadı, lütfen tekrar deneyin.");
-      }
-    }
-  };
-
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    setError("");
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      navigate('/');
-    } catch (err) {
-      if (err.code === "auth/user-not-found") {
-        setError("Bu e-posta ile kayıtlı kullanıcı bulunamadı.");
-      } else if (err.code === "auth/wrong-password") {
-        setError("E-posta veya şifre hatalı.");
-      } else if (err.code === "auth/too-many-requests") {
-        setError("Çok fazla başarısız giriş denemesi. Bir süre sonra tekrar deneyin.");
-      } else {
-        setError("Giriş başarısız oldu. Lütfen tekrar deneyin.");
-        console.error("Giriş hatası:", err);
-      }
-    }
-  };
+  const {handleLogin} = useLogin({auth, email, password, navigate, setError});
+  const {loginWithGoogle} = useGoogleLogin({auth, googleProvider, db, navigate, setError});
   return (
     <>
       <form onSubmit={handleLogin} className="flex flex-col items-start justify-start gap-10">

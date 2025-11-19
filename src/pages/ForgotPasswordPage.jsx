@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { sendPasswordResetEmail } from 'firebase/auth'; 
-import { auth } from '../firebaseConfig'; 
+import { auth } from '../config/firebaseConfig'; 
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button';
