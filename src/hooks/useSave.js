@@ -4,11 +4,6 @@ import { getFirestore, doc, updateDoc } from 'firebase/firestore';
 export function useSave({currentUser, formData, setIsEditing, setIsSaving, setSaveError, refreshUserInfo}) {
     const db = getFirestore();
     const handleSave = async () => {
-        if (!currentUser) {
-            setSaveError("Kullanıcı oturumu bulunamadı.");
-            return;
-        }
-
         setIsSaving(true);
         setSaveError(null);
 
