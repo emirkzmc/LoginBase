@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button';
 import InputField from '../components/InputField';
 import BackgroundForgotPassword  from '../components/background/BackgroundForgotPassword';
+import { motion } from "framer-motion";
 
 export default function ForgotPasswordPage() {
     const navigate = useNavigate();
@@ -41,6 +42,12 @@ export default function ForgotPasswordPage() {
 
     return (
         <BackgroundForgotPassword>
+            <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: "easeInOut" }}
+                className="w-full flex flex-col items-center justify-center"
+                > 
             <form onSubmit={handlePasswordReset} className="flex flex-col items-start justify-start gap-10">
                 <p className="text-3xl font-semibold">ŞİFRE YENİLE</p>
                 <p className="text-gray-600 -mt-6 max-w-xs">
@@ -68,11 +75,12 @@ export default function ForgotPasswordPage() {
  
                     <Button type="submit" variant="danger" whattype="text" text="SIFIRLAMA LİNKİ GÖNDER" />
                     
-                    <Link to="/login" className="text-[13px] text-[#397762] hover:text-[#5FE4B8] transition hover:duration-200 active:text-[#72A795]">
+                    <Link to="/login" className="text-[14px] text-[#3b060d] hover:text-[#c43346] transition hover:duration-200 active:text-[#72A795]">
                         Giriş'e geri dön
                     </Link>
                 </div>
             </form>
+            </motion.div>
         </BackgroundForgotPassword>
     );
 }

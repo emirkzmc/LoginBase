@@ -7,6 +7,8 @@ import { auth , googleProvider, db } from "../config/firebaseConfig.js";
 import { useNavigate } from "react-router-dom";
 import { useLogin } from "../hooks/useLogin.js";
 import { useGoogleLogin } from "../hooks/useGoogleLogin.js";
+import { motion } from "framer-motion";
+
 
 export default function SignIn() {
 
@@ -22,6 +24,12 @@ export default function SignIn() {
   const {loginWithGoogle} = useGoogleLogin({auth, googleProvider, db, navigate, setError});
   return (
     <>
+    <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeInOut" }}
+        className="w-full flex flex-col items-center justify-center"
+      >
       <form onSubmit={handleLogin} className="flex flex-col items-start justify-start gap-10">
 
         <p className="text-3xl font-semibold">HOŞ GELDİNİZ</p>
@@ -85,13 +93,14 @@ export default function SignIn() {
             </button>
 
           </div>
-          <Link to="/register" className="text-[13px]  text-[#397762] hover:text-[#5FE4B8] transition hover:duration-200 active:text-[#72A795]">
+          <Link to="/register" className="text-[14px]  text-[#397762] hover:text-[#5FE4B8] transition hover:duration-200 active:text-[#72A795]">
             Hala kayıt değil misin?
           </Link>
         </div>{error && <p className="text-sm text-red-500">{error}</p>}
 
 
       </form>
+      </motion.div>
     </>
   );
 

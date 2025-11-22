@@ -4,7 +4,7 @@ import Input from "../components/Input";
 import InputField from "../components/InputField";
 import { Link } from "react-router-dom";
 import { useRegister } from "../hooks/useRegister";
-
+import { motion } from "framer-motion";
 
 
 export default function Signup() {
@@ -36,15 +36,21 @@ export default function Signup() {
   };
 
   const inputs = [
-    { iconType: "user", placeholder: "Ad-Soyad", typee: "text", value: name, onChange: (e) => setName(e.target.value) },
-    { iconType: "user", placeholder: "T.C Kimlik", typee: "text", value: usertc, onChange: handleTcChange, maxLength: 11, inputMode: "numeric" },
-    { iconType: "email", placeholder: "E-posta Adresi", typee: "email", value: email, onChange: (e) => setEmail(e.target.value) },
-    { iconType: "password", placeholder: "Şifre", typee: "password", value: password, onChange: (e) => setPassword(e.target.value), showPassword: isChecked },
-    { iconType: "password", placeholder: "Şifre Tekrar", typee: "password", value: confirmPassword, onChange: (e) => setConfirmPassword(e.target.value), showPassword: isChecked },
+    { iconType: "user",iconColor:"#3494d9" ,focusBorderColor:"#107ecc", placeholder: "Ad-Soyad", typee: "text", value: name, onChange: (e) => setName(e.target.value) },
+    { iconType: "user",iconColor:"#3494d9" ,focusBorderColor:"#107ecc", placeholder: "T.C Kimlik", typee: "text", value: usertc, onChange: handleTcChange, maxLength: 11, inputMode: "numeric" },
+    { iconType: "email",iconColor:"#3494d9" ,focusBorderColor:"#107ecc", placeholder: "E-posta Adresi", typee: "email", value: email, onChange: (e) => setEmail(e.target.value) },
+    { iconType: "password",iconColor:"#3494d9" ,focusBorderColor:"#107ecc", placeholder: "Şifre", typee: "password", value: password, onChange: (e) => setPassword(e.target.value), showPassword: isChecked },
+    { iconType: "password",iconColor:"#3494d9" ,focusBorderColor:"#107ecc", placeholder: "Şifre Tekrar", typee: "password", value: confirmPassword, onChange: (e) => setConfirmPassword(e.target.value), showPassword: isChecked },
   ]
 
   return (
     <>
+    <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeInOut" }}
+        className="w-full flex flex-col items-center justify-center"
+      > 
       <form onSubmit={handleRegister} className="flex flex-col items-start justify-start gap-10">
 
         <p className="text-3xl font-semibold">KAYIT OL</p>
@@ -73,7 +79,7 @@ export default function Signup() {
           <Button type="submit" variant="secondary" whattype="text" text={isLoading ? "KAYIT OLUNUYOR.." : "KAYIT OL"} disabled={isLoading} />
           <Link
             to="/login"
-            className="text-[13px] pt-3 text-[#397762] hover:text-[#8EDBFF] active:text-[#0D5080] transition hover:duration-300"
+            className="text-[14px] pt-3 text-[#003e6b] hover:text-[#8EDBFF] active:text-[#0D5080] transition hover:duration-300"
           >
             Zaten bir hesabın var mı?
           </Link>
@@ -81,6 +87,7 @@ export default function Signup() {
         {error && <p className="max-w-xs text-sm text-red-500">{error}</p>}
 
       </form>
+      </motion.div>
     </>
   );
 }

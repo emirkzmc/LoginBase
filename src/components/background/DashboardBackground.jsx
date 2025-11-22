@@ -1,6 +1,6 @@
 export default function DashboardBackground({ children }) {
     return (
-        <div className='flex-1 relative bg-gradient-to-br from-blue-500 via-blue-600 to-blue-900 overflow-hidden'>
+        <div className='flex-1 relative bg-gradient-to-br from-[#abd6f5] via-[#a5c2d6] to-[#abd6f5] dark:bg-gradient-to-br dark:from-blue-500 dark:via-blue-600 dark:to-blue-900 overflow-hidden'>
         <div className="absolute inset-0 overflow-hidden">
             
             <div className="absolute -top-40 -left-40 w-96 h-96 bg-gradient-to-br from-cyan-400/30 to-blue-500/30 rounded-full blur-3xl animate-pulse-slow"></div>

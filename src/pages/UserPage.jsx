@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar';
 import Loading from '../components/animate/Loading';
 import UserPageBackground from '../components/background/UserPageBackground';
 import ProfileInfo from '../components/ProfileInfo';
+import { motion } from 'framer-motion';
 
 export default function UserPage() {
     const [formData, setFormData] = useState({
@@ -54,9 +55,15 @@ export default function UserPage() {
             <div className='w-full h-screen flex flex-col'>
                 <Navbar />
                 <div className='flex-grow flex justify-center items-center p-4'>
-                    <ProfileInfo formData={formData}
-                        handleChange={handleChange}
-                    />
+                    <motion.div
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, ease: "easeInOut" }}
+                    >
+                        <ProfileInfo formData={formData}
+                            handleChange={handleChange}
+                        />
+                    </motion.div>
                 </div>
             </div>
         </UserPageBackground>

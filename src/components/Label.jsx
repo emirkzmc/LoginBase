@@ -1,8 +1,8 @@
-export default function Label({text}){
+export default function Label({text , className}) {
 
     return(
     <>
-    <p>{text}</p>
+    <p className={className}>{text}</p>
     </>
     );
 }

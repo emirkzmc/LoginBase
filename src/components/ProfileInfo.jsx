@@ -35,14 +35,14 @@ export default function ProfileInfo({ formData, handleChange }) {
     ];
     return (
         <div>
-            <div className='bg-white rounded-lg shadow-lg p-8 w-screen max-w-lg min-w-sm '>
-                <h2 className='text-3xl font-bold text-blue-950 mb-6 text-center'>
+            <div className='bg-white dark:bg-black/20 rounded-2xl shadow-lg p-8 w-screen max-w-lg min-w-sm '>
+                <h2 className='text-3xl font-bold text-[#66b2e8] dark:text-blue-950 mb-6 text-center'>
                     Profil Bilgilerim
                 </h2>
                 <div className='space-y-6'>
                     {inputFields.map(({ name, label, type }) => (
                         <div key={name} className="flex flex-col gap-4">
-                            <Label text={label} className="block text-sm font-semibold text-gray-700" />
+                            <Label text={label} className="block text-sm font-semibold dark:text-gray-200" />
                             <Input
                                 name={name}
                                 type={type}
@@ -86,7 +86,7 @@ export default function ProfileInfo({ formData, handleChange }) {
                                 text="Düzenle"
                                 whattype="button"
                                 onClick={() => setIsEditing(true)}
-                                className='px-6 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700'
+                                className='px-6 py-2 dark:bg-blue-600 bg-[#66b2e8] hover:bg-blue-300 transition hover:duration-300 hover:ease-in-out text-white rounded-lg font-semibold dark:hover:bg-blue-700'
                             />
                         )}
                     </div>
