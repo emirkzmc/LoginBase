@@ -8,10 +8,13 @@ export function useLogin({ auth, email, password, navigate, setError }) {
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
+    setIsLoading(true);
     try {
       await signInWithEmailAndPassword(auth, email, password);  
+      
       navigate('/');
     } catch (err) {
+      setIsLoading(false);
       if (err.code === "auth/user-not-found") {
         setError("Bu e-posta ile kayıtlı kullanıcı bulunamadı.");
       } else if (err.code === "auth/wrong-password") {

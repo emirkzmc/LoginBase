@@ -21,7 +21,7 @@ export default function SignIn() {
   
 
   const {handleLogin} = useLogin({auth, email, password, navigate, setError});
-  const {loginWithGoogle} = useGoogleLogin({auth, googleProvider, db, navigate, setError});
+  const {loginWithGoogle} = ({auth, googleProvider, db, navigate, setError});
   return (
     <>
     <motion.div
